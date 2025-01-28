@@ -37,13 +37,13 @@ function HashtagComponent() {
   }
 
   useEffect(() => {
-    fetch("http://localhost:3000/tweets/hashtags")
+    fetch("https://hackatweet-backend-lemon.vercel.app/tweets/hashtags")
       .then((response) => response.json())
       .then((data) => setTrends(data.result));
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:3000/tweets/searchTweet", {
+    fetch("https://hackatweet-backend-lemon.vercel.app/tweets/searchTweet", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ hashtag: hashtag }),
@@ -71,7 +71,7 @@ function HashtagComponent() {
       if(!user.token){
         return
       }
-      fetch(`http://localhost:3000/users/${user.token}`)
+      fetch(`https://hackatweet-backend-lemon.vercel.app/users/${user.token}`)
       .then(response => response.json())
       .then(data => {
         if(data.result){

@@ -33,8 +33,8 @@ const Tweet = ({
       tweetId,
     };
     const url = isLiked
-      ? "http://localhost:3000/tweets/unlikeTweet"
-      : "http://localhost:3000/tweets/likeTweet";
+      ? "https://hackatweet-backend-lemon.vercel.app/tweets/unlikeTweet"
+      : "https://hackatweet-backend-lemon.vercel.app/tweets/likeTweet";
 
     fetch(url, {
       method: "POST",
@@ -60,7 +60,7 @@ const Tweet = ({
       return;
     }
     const token = user.token;
-    fetch(`http://localhost:3000/tweets/deleteTweet/${token}/${tweetId}`, {
+    fetch(`https://hackatweet-backend-lemon.vercel.app/tweets/deleteTweet/${token}/${tweetId}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
