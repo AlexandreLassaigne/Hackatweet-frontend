@@ -1,0 +1,191 @@
+.leftSection {
+  height : 100vh;
+  width: 25vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px;
+
+}
+
+.middleSection {
+  height: 100vh;
+  width: 50vw;
+  border-left: 1px solid rgb(110, 109, 109);
+  border-right: 1px solid  rgb(110, 109, 109);
+}
+
+.rightSection {
+  height: 100vh;
+  width: 25vw;
+}
+
+.home{
+  background-color: #151D26;
+  display: flex;
+}
+
+.leftTwitterLogo {
+  height: 70px;
+  width: 70px;
+  cursor: pointer;
+}
+
+.userLogo {
+  height: 55px;
+  width: 50px;
+}
+
+.userSection {
+  display: flex;
+  align-items: center;
+}
+
+.userInfos {
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+.userFirstName {
+  margin: 0;
+}
+
+.username {
+  margin-top: 7px;
+  color:  #657e9b;
+}
+
+.middleSection {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title{
+  color: white;
+  width: 100%;
+  text-align: left;
+  font-size: 30px;
+}
+
+.input{
+  font-family: Verdana;
+  font-size: 25px;
+  background-color: #151D26;
+  width: 80%;
+  border: none;
+  border-bottom: 2px solid grey;
+  color: white;
+  overflow-wrap: break-word;
+  min-height: 50px; 
+  max-height: 200px;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.tweetButton {
+  background-color: #388FED;
+  font-family: Verdana;
+  font-weight: 800;
+  font-size: 18px;
+  color: white;
+  width: 115px;
+  height: 35px;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.tweetSection {
+  width: 80%;
+  text-align: right;
+  margin-top: 15px;
+}
+
+.letterCounter{
+  color: white;
+  font-family: Verdana;
+  margin-right: 20px;
+}
+
+
+
+.userDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.logout {
+  color: white;
+
+  text-align: center;
+  width: 100px;
+  height: 25px;
+  margin-top: 15px;
+  background-color: #151D26;
+  border: 1px solid white;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+
+.tweetsNumber {
+  color: #657e9b;
+  font-size: 13px;
+}
+
+
+.tweetsContainer{
+  overflow: auto;
+  width: 100%;
+  width: calc(100% + 60px);
+}
+
+
+/*  */
+
+.rightSection{
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.trendsSection{
+  width: 100%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+/* Barre de défilement */
+.tweetsContainer::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+
+.tweetsContainer::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 8px; 
+}
+
+.tweetsContainer::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+.tweetsContainer::-webkit-scrollbar-horizontal {
+  height: 6px;
+}
+
+.tweetsContainer::-webkit-scrollbar-vertical {
+  width: 6px;
+}
+

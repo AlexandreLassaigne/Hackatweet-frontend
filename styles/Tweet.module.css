@@ -1,0 +1,44 @@
+.tweetContainer{
+    /* width: calc(100% + 60px); */
+    color: white;
+    border-top: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.info{
+    display: flex;
+    align-items: center;
+}
+.userImage{
+    margin-right: 10px;
+    width: 75px;
+}
+.textGrey{
+    color: #424D5D
+}
+.like{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.like svg{
+    cursor: pointer;
+}
+.text{
+    gap: 10px;
+    display: flex;
+    align-items: center;
+}
+.text p {
+    color: #424D5D;
+    font-weight: 600;
+}
+.text span {
+    font-size: 18px;
+}
+
