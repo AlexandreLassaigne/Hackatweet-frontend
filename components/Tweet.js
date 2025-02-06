@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "../styles/Tweet.module.css";
-import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,8 +32,8 @@ const Tweet = ({
       tweetId,
     };
     const url = isLiked
-      ? "http://localhost:3000/tweets/unlikeTweet"
-      : "http://localhost:3000/tweets/likeTweet";
+      ? "https://hackatweet-backend-psi-seven.vercel.app/tweets/unlikeTweet"
+      : "https://hackatweet-backend-psi-seven.vercel.app/tweets/likeTweet";
 
     fetch(url, {
       method: "POST",
@@ -60,7 +59,7 @@ const Tweet = ({
       return;
     }
     const token = user.token;
-    fetch(`http://localhost:3000/tweets/deleteTweet/${token}/${tweetId}`, {
+    fetch(`https://hackatweet-backend-psi-seven.vercel.app/tweets/deleteTweet/${token}/${tweetId}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
@@ -84,12 +83,6 @@ const Tweet = ({
           alt="Picture of the user"
           className={styles.userImage}
         />
-        {/* <p>
-          {firstname}
-          <span className={styles.textGrey}>
-            @{username}. {date}
-          </span>
-        </p> */}
         <div className={styles.text}>
           <span>{firstname}</span>
           <p>@{username}</p>

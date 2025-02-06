@@ -25,7 +25,7 @@ function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    fetch("http://localhost:3000/tweets")
+    fetch("https://hackatweet-backend-psi-seven.vercel.app/tweets")
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
@@ -42,7 +42,7 @@ function Home() {
     if(!user.token){
       return
     }
-    fetch(`http://localhost:3000/users/${user.token}`)
+    fetch(`https://hackatweet-backend-psi-seven.vercel.app/users/${user.token}`)
     .then(response => response.json())
     .then(data => {
       if(data.result){
@@ -53,7 +53,7 @@ function Home() {
   }, [])
   // Fetch pour récupérer les trends
   useEffect(() => {
-    fetch("http://localhost:3000/tweets/hashtags")
+    fetch("https://hackatweet-backend-psi-seven.vercel.app/tweets/hashtags")
       .then((response) => response.json())
       .then((data) => {
         let trendsTab = [];
@@ -73,7 +73,7 @@ function Home() {
     if (!user.token) {
       return;
     }
-    fetch(`http://localhost:3000/users/${user.token}`)
+    fetch(`https://hackatweet-backend-psi-seven.vercel.app/users/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
@@ -87,7 +87,7 @@ function Home() {
     if (!user.token) {
       return;
     }
-    fetch(`http://localhost:3000/users/${user.token}`)
+    fetch(`https://hackatweet-backend-psi-seven.vercel.app/users/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
@@ -118,7 +118,7 @@ function Home() {
 
   const handleTweet = () => {
     if (!user.token) return;
-    fetch("http://localhost:3000/tweets/postTweet", {
+    fetch("https://hackatweet-backend-psi-seven.vercel.app/tweets/postTweet", {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ message: tweetMessage, token: user.token }),
