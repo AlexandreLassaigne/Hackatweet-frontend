@@ -1,30 +1,30 @@
-import styles from '../styles/HashtagComponent.module.css';
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
-import Trends from './Trends';
-import Tweet from './Tweet';
-import { logout } from '../reducers/user';
+import styles from "../styles/HashtagComponent.module.css";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import Trends from "./Trends";
+import Tweet from "./Tweet";
+import { logout } from "../reducers/user";
 import moment from "moment";
 
 function HashtagComponent() {
   const router = useRouter();
   const { slug } = router.query;
-  const user = useSelector(state => state.user.value)
-  const dispatch = useDispatch()
-  const [hashtag, setHashtag] = useState('')
-  const [trends, setTrends] = useState([])
-  const [tweets, setTweets] = useState([])
-  const [firstName, setFirstName] = useState('')
-  const [username, setUsername] = useState('')
+  const user = useSelector((state) => state.user.value);
+  const dispatch = useDispatch();
+  const [hashtag, setHashtag] = useState("");
+  const [trends, setTrends] = useState([]);
+  const [tweets, setTweets] = useState([]);
+  const [firstName, setFirstName] = useState("");
+  const [username, setUsername] = useState("");
 
   // Fonctionnalité pour changer l'url de manière dynamique
   const likes = useSelector((state) => state.likes.value);
 
   useEffect(() => {
     if (slug) {
-        setHashtag("#" +slug);
+      setHashtag("#" + slug);
     } else {
       setHashtag("#");
     }
@@ -43,11 +43,14 @@ function HashtagComponent() {
   }, []);
 
   useEffect(() => {
-    fetch("https://hackatweet-backend-psi-seven.vercel.app/tweets/searchTweet", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ hashtag: hashtag }),
-    })
+    fetch(
+      "https://hackatweet-backend-psi-seven.vercel.app/tweets/searchTweet",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ hashtag: hashtag }),
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         const sortedTweets = data.result.sort(
@@ -66,25 +69,24 @@ function HashtagComponent() {
     );
   };
 
-
-    useEffect(() => {
-      if(!user.token){
-        return
-      }
-      fetch(`https://hackatweet-backend-psi-seven.vercel.app/users/${user.token}`)
-      .then(response => response.json())
-      .then(data => {
-        if(data.result){
+  useEffect(() => {
+    if (!user.token) {
+      return;
+    }
+    fetch(`https://hackatweet-backend-psi-seven.vercel.app/users/${user.token}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.result) {
           setFirstName(data.firstName);
           setUsername(data.username);
         }
-      })
-    }, [])
+      });
+  }, []);
 
-    const handleClick = () => {
-      dispatch(logout());
-      router.push("/");
-    };
+  const handleClick = () => {
+    dispatch(logout());
+    router.push("/");
+  };
 
   // Supprimer un tweet dans l'état
   const handleDeleteTweet = (tweetId) => {
@@ -95,26 +97,35 @@ function HashtagComponent() {
 
   const tweetsTab = tweets.map((tweet) => {
     const isLiked = likes.includes(tweet._id);
-    const isUser = tweet.user.token === user.token;
+    //L'opérateur ?. s'appelle l'optional chaining (chaînage optionnel).
+    // Il permet d'éviter les erreurs lorsque tu essaies d'accéder à une
+    // propriété d'un objet qui pourrait être null ou undefined
+    const isUser = tweet.user?.token === user?.token;
     const date = moment(tweet.date).fromNow(true);
-     //Permet de mettre les hashtag en bleu 
-     const message = tweet.message.split(' ')
-     const tweets = message.map((word, i) => {
-       if(word.startsWith('#')){
-         return <span key={i} style={{'color':'#3283d3'}}>{word}{' '}</span>
-       } else {
-         return word + ' '
-       }
-     }) 
+    //Permet de mettre les hashtag en bleu
+    const message = tweet.message.split(" ");
+    const tweets = message.map((word, i) => {
+      if (word.startsWith("#")) {
+        return (
+          <span key={i} style={{ color: "#3283d3" }}>
+            {word}{" "}
+          </span>
+        );
+      } else {
+        return word + " ";
+      }
+    });
     return (
       <Tweet
         key={tweet._id}
         date={date}
         message={tweets}
         like={tweet.like.length}
-        avatar={tweet.user.avatar}
-        firstname={tweet.user.firstname}
-        username={tweet.user.username}
+        //En utilisant ?., tu dis à JavaScript :
+        // "Si element.user existe, alors prends element.user.token, sinon retourne undefined sans planter."
+        avatar={tweet.user?.avatar}
+        firstname={tweet.user?.firstname}
+        username={tweet.user?.username}
         tweetId={tweet._id}
         isLiked={isLiked}
         isUser={isUser}
@@ -127,24 +138,37 @@ function HashtagComponent() {
   return (
     <div className={styles.home}>
       <section className={styles.leftSection}>
-      <Link href="/homepage"><img className={styles.leftTwitterLogo} src='/twitter.png'></img></Link>
+        <Link href="/homepage">
+          <img className={styles.leftTwitterLogo} src="/twitter.png"></img>
+        </Link>
         <div className={styles.userSection}>
-          <img className={styles.userLogo} src='/userIcon.png'></img>
+          <img className={styles.userLogo} src="/userIcon.png"></img>
           <div className={styles.userInfos}>
             <h3 className={styles.userFirstName}>{firstName}</h3>
             <span className={styles.username}>@{username}</span>
-            <button className={styles.logout} onClick={handleClick}>Logout</button>
+            <button className={styles.logout} onClick={handleClick}>
+              Logout
+            </button>
           </div>
         </div>
       </section>
 
       <section className={styles.middleSection}>
         <h2 className={styles.title}>Hashtag</h2>
-        <input  autoFocus value={hashtag} onChange={(e) =>searchHashtag(e)} type="text" className={styles.input}></input>
-        {tweetsTab.length > 0 ? <div className={styles.tweetsContainer}>{tweetsTab}</div>
-        : <div className={styles.tweetsContainer}><p className={styles.noTweet}>No tweets found with {hashtag}</p></div>
-        }
-        
+        <input
+          autoFocus
+          value={hashtag}
+          onChange={(e) => searchHashtag(e)}
+          type="text"
+          className={styles.input}
+        ></input>
+        {tweetsTab.length > 0 ? (
+          <div className={styles.tweetsContainer}>{tweetsTab}</div>
+        ) : (
+          <div className={styles.tweetsContainer}>
+            <p className={styles.noTweet}>No tweets found with {hashtag}</p>
+          </div>
+        )}
       </section>
 
       <section className={styles.rightSection}>

@@ -148,10 +148,12 @@ function Home() {
     );
   };
 
-  //
   const tweets = tweetsData.map((element, i) => {
     const isLiked = likes.includes(element._id);
-    const isUser = element.user.token === user.token;
+    //L'opérateur ?. s'appelle l'optional chaining (chaînage optionnel). 
+    // Il permet d'éviter les erreurs lorsque tu essaies d'accéder à une 
+    // propriété d'un objet qui pourrait être null ou undefined
+    const isUser = element.user?.token === user?.token;
     const date = moment(element.date).fromNow(true);
     //Permet de mettre les hashtag en bleu
     const message = element.message.split(' ')
@@ -168,9 +170,11 @@ function Home() {
         date={date}
         message={tweet}
         like={element.like.length}
-        avatar={element.user.avatar}
-        firstname={element.user.firstName}
-        username={element.user.username}
+        //En utilisant ?., tu dis à JavaScript : 
+        // "Si element.user existe, alors prends element.user.token, sinon retourne undefined sans planter."
+        avatar={element.user?.avatar}
+        firstname={element.user?.firstName}
+        username={element.user?.username}
         tweetId={element._id}
         isLiked={isLiked}
         isUser={isUser}
